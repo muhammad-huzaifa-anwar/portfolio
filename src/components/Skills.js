@@ -1,7 +1,27 @@
 "use client";
 import { motion } from "framer-motion";
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaBootstrap, FaDatabase } from "react-icons/fa";
-import { SiNextdotjs, SiMongodb, SiTailwindcss, SiNestjs, SiPostgresql, SiGraphql, SiShadcnui } from "react-icons/si";
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaNodeJs,
+  FaBootstrap,
+  FaDatabase,
+  FaGithub,
+  FaServer,
+} from "react-icons/fa";
+import {
+  SiNextdotjs,
+  SiMongodb,
+  SiTailwindcss,
+  SiNestjs,
+  SiPostgresql,
+  SiGraphql,
+  SiShadcnui,
+  SiExpress,
+  SiFirebase,
+} from "react-icons/si";
 
 const skills = [
   { name: "HTML", icon: FaHtml5, color: "text-orange-500" },
@@ -24,35 +44,68 @@ const skills = [
   { name: "Vercel", icon: FaDatabase, color: "text-black dark:text-white" },
   { name: "Render", icon: FaDatabase, color: "text-blue-400" },
   { name: "Clerk Auth", icon: FaDatabase, color: "text-pink-400" },
+
+  // New additions:
+  { name: "GitHub", icon: FaGithub, color: "text-gray-300" },
+  { name: "Express.js", icon: SiExpress, color: "text-black" },
+  { name: "Firebase", icon: SiFirebase, color: "text-yellow-400" },
+  { name: "RESTful APIs", icon: FaServer, color: "text-indigo-500" },
 ];
+
+// Variants for container to stagger children animations
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+// Variants for each skill item
+const skillVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1 },
+};
 
 export default function Skills() {
   return (
-  <section id="skills" className="scroll-mt-20 flex flex-col justify-center items-center min-h-[50vh]">
-      <motion.h2 
-        initial={{ opacity: 0, y: 10 }} 
-        whileInView={{ opacity: 1, y: 0 }} 
-        viewport={{ once: true }} 
-        transition={{ duration: 0.4 }} 
+    <section
+      id="skills"
+      className="scroll-mt-20 flex flex-col justify-center items-center min-h-[50vh] w-full"
+    >
+      <motion.h2
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.1 }}
         className="text-4xl sm:text-5xl font-bold text-center text-white mb-6"
       >
         Skills
       </motion.h2>
-      <div className="mt-4 flex flex-wrap gap-6 justify-center items-center">
+
+      <motion.div
+        className="mt-4 flex flex-wrap gap-6 justify-center items-center w-full"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         {skills.map((s) => (
-          <motion.div 
-            key={s.name} 
-            initial={{ opacity: 0, scale: 0.8 }} 
-            whileInView={{ opacity: 1, scale: 1 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 0.3, type: "spring", stiffness: 120 }} 
-            className="flex flex-col items-center w-16 h-16 justify-center"
+          <motion.div
+            key={s.name}
+            variants={skillVariants}
+            transition={{ type: "spring", stiffness: 120, damping: 15 }}
+            whileHover={{ scale: 1.15, rotate: 5, zIndex: 10 }}
+            className="flex flex-col items-center w-16 h-16 justify-center cursor-pointer select-none"
+            title={s.name}
           >
             <s.icon className={`text-3xl ${s.color}`} />
             <span className="mt-1 text-xs font-medium text-white text-center">{s.name}</span>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from 'react';
 import { Hero, About, Skills, Projects, Experience } from '../components';
 import GoodBusiness from '../components/GoodBusiness';
@@ -11,47 +12,40 @@ export default function Home() {
   }, []);
 
   if (!hydrated) {
-    // Render null or a loader on server-side
-    return null;
+    return null; // Render nothing until hydration is complete
   }
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center space-y-24 px-4 py-12"
-
-    >
-
-      <section className="w-full max-w-5xl bg-gray-900 rounded-lg p-8 text-white">
+    <>
+      {/* Hero Section */}
+      <section className="w-full bg-gray-900 p-8 text-white z-10">
         <Hero />
       </section>
 
-
-      <section className="w-full max-w-5xl bg-gray-800 rounded-lg p-8 text-white">
+      {/* About Section */}
+      <section className="w-full bg-gray-800  p-8 text-white z-10">
         <About />
       </section>
 
-      <section className="w-full max-w-5xl bg-gray-800 rounded-lg p-8 text-white">
+      {/* Experience Section */}
+      <section className="w-full bg-gray-800  p-8 text-white z-10">
         <Experience />
       </section>
 
-      <section className="w-full max-w-5xl bg-gray-900 rounded-lg p-8 text-white">
+      {/* Projects Section */}
+      <section className="w-full bg-gray-900  p-8 text-white z-10">
         <Projects />
       </section>
 
-
-      <section className="w-full max-w-5xl bg-gray-900 rounded-lg p-8 text-white">
+      {/* Skills Section */}
+      <section className="w-full bg-gray-900  p-8 text-white z-10">
         <Skills />
       </section>
 
-
-      <section className="w-full max-w-5xl">
+      {/* GoodBusiness Section */}
+      <section className="w-full z-10">
         <GoodBusiness />
       </section>
-
-
-
-
-
-    </div>
+    </>
   );
 }

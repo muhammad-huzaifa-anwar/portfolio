@@ -15,13 +15,13 @@ const geistMono = Geist_Mono({
 
 const RootLayout = ({ children }) => (
   <html lang="en">
-    <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-neutral-900 dark:bg-black dark:text-neutral-100`}>
-      <div className="min-h-screen flex flex-col">
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased text-neutral-900  `}>
+      <div className="min-h-screen flex flex-col w-full">
         <Navbar />
-        <main className="flex-1 container mx-auto px-4">{children}</main>
-        <footer id="contact" className="bg-gray-900 text-white border-t border-neutral-200/60 dark:border-neutral-800 py-8">
-          <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-            <div>© {new Date().getFullYear()} M Huzaifa Anwar.</div>
+        <main className="flex-1 w-full">{children}</main>
+        <footer id="contact" className="bg-gray-900 text-white border-t border-neutral-200/60 dark:border-neutral-800 py-8 w-full">
+          <div className="px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm w-full">
+            <div>M Huzaifa Anwar.</div>
             <div className="flex items-center gap-4">
               <a href="mailto:muhammadhuzaifa2544@gmail" className="hover:opacity-80 text-white">Email</a>
               <a href="tel:03102174111" className="hover:opacity-80 text-white">Phone</a>

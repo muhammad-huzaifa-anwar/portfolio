@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const skills = [
 	{
@@ -34,34 +35,38 @@ const skills = [
 
 export default function SkillsSection() {
 	return (
-		<section className="py-16 bg-white">
-			<div className="container mx-auto px-4">
+		<section className="py-16 bg-white w-full">
+			<div className="px-4 w-full">
 				<h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-12">
 					I Know That Good Apps
 					<br />
 					Means Good Business
 				</h2>
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-					{skills.map((skill, idx) => (
-						<div
-							key={idx}
-							className="bg-white rounded-xl shadow-lg p-6 text-center transition-transform hover:scale-105"
-						>
-							<div className="relative w-full h-40 mb-4">
-								<Image
-									src={skill.src}
-									alt={skill.alt}
-									fill
-									className="object-contain"
-									sizes="(max-width: 768px) 100vw, 25vw"
-								/>
-							</div>
-							<h3 className="text-lg font-bold mb-2">{skill.title}</h3>
-							<p className="text-gray-600 text-sm">
-								{skill.description}
-							</p>
-						</div>
-					))}
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
+									{skills.map((skill, idx) => (
+										<motion.div
+											key={idx}
+											initial={{ x: -100, opacity: 0 }}
+											whileInView={{ x: 0, opacity: 1 }}
+											transition={{ duration: 0.6, delay: idx * 0.15 }}
+											viewport={{ once: true, amount: 0.5 }}
+											className="bg-white rounded-xl shadow-lg p-6 text-center transition-transform hover:scale-105"
+										>
+											<div className="relative w-full h-40 mb-4">
+												<Image
+													src={skill.src}
+													alt={skill.alt}
+													fill
+													className="object-contain"
+													sizes="(max-width: 768px) 100vw, 25vw"
+												/>
+											</div>
+											<h3 className="text-lg font-bold mb-2">{skill.title}</h3>
+											<p className="text-gray-600 text-sm">
+												{skill.description}
+											</p>
+										</motion.div>
+									))}
 				</div>
 			</div>
 		</section>
