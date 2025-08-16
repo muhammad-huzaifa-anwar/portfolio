@@ -155,7 +155,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="mailto:muhammadhuzaifa2544@gmail"
+              href="mailto:muhammadhuzaifa2544@gmail.com?subject=Portfolio%20Inquiry&body=Hello%20Huzaifa,%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect.%0D%0A%0D%0APlease%20let%20me%20know%20if%20you%20are%20available%20for%20discussion.%0D%0A%0D%0ABest%20regards,"
               className="hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 rounded transition-all duration-200 text-3xl font-medium"
               aria-label="Send email via Gmail"
               title="Contact via Gmail"
