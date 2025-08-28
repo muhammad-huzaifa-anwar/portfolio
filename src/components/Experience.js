@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 
 const experienceData = [
   {
-    role: "Frontend Internship - TA Creatives",
-    duration: "Feb 2025 - April 2025",
-    desc: "Completed a 3-month frontend development internship at TA Creatives, working with React.js and Bootstrap.",
+    role: "Mern Stack Developer - TA Creatives",
+    duration: "Feb 2025 - July 2025",
+    desc: "Completed a 6-month MERN stack (PAID internship) at TA Creatives, where I worked on frontend-backend integration using RESTful APIs, and contributed to frontend development using React.js. I gained hands-on experience with MongoDB, Express.js, React, and Node.js, and collaborated with a cross-functional team to build and maintain web applications."
   },
   {
     role: "MERN Stack Internship - Coderatory",
