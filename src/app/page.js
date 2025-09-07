@@ -27,10 +27,7 @@ export default function Home() {
         <About />
       </section>
 
-      {/* Experience Section */}
-      <section className="w-full bg-gray-800  p-8 text-white z-10">
-        <Experience />
-      </section>
+ 
 
       {/* Projects Section */}
       <section className="w-full bg-gray-900  p-8 text-white z-10">
