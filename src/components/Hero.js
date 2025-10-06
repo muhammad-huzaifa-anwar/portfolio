@@ -165,7 +165,7 @@ export default function Hero() {
 
           </div>
 
-          <div className="text-sm ">Phone: 03102174199</div>
+          <div className="text-sm ">Phone: 03141155677</div>
         </div>
 
         <motion.div
