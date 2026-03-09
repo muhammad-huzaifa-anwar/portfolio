@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 const projects = [
@@ -107,6 +107,128 @@ const projects = [
 	},
 ];
 
+const ProjectCard = ({ p, onClick }) => {
+	const rx = useMotionValue(0);
+	const ry = useMotionValue(0);
+	const sx = useSpring(rx, { stiffness: 200, damping: 20 });
+	const sy = useSpring(ry, { stiffness: 200, damping: 20 });
+	const onMove = (e) => {
+		const rect = e.currentTarget.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+		const y = e.clientY - rect.top;
+		const dx = x / rect.width - 0.5;
+		const dy = y / rect.height - 0.5;
+		rx.set(dy * -10);
+		ry.set(dx * 10);
+	};
+	const onLeave = () => {
+		rx.set(0);
+		ry.set(0);
+	};
+	return (
+		<motion.div
+			key={p.slug}
+			initial={{ x: -100, opacity: 0 }}
+			whileHover={{
+				scale: 1.03,
+				boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
+			}}
+			whileTap={{ scale: 0.97 }}
+			whileInView={{ x: 0, opacity: 1 }}
+			viewport={{ once: true, amount: 0.5 }}
+			transition={{ duration: 0.6, type: "spring", stiffness: 140 }}
+			className={
+				"group rounded-2xl overflow-hidden cursor-pointer shadow-md " +
+				"bg-neutral-900 hover:shadow-xl w-full relative ring-1 ring-white/10 hover:ring-indigo-400/40"
+			}
+			onClick={onClick}
+			style={{ minHeight: "320px" }}
+			onMouseMove={onMove}
+			onMouseLeave={onLeave}
+		>
+			<motion.div
+				className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+				style={{
+					background:
+						"radial-gradient(700px 200px at 50% 0%, rgba(99,102,241,0.10), rgba(99,102,241,0))",
+					filter: "blur(24px)",
+				}}
+			/>
+			<motion.div style={{ rotateX: sx, rotateY: sy }} className="relative z-10">
+				<div className="relative h-36 md:h-40 bg-neutral-800">
+					<Image src={p.image} alt={p.title} fill className="object-cover" priority={false} />
+					<motion.div
+						initial={{ y: "100%" }}
+						whileHover={{ y: 0 }}
+						transition={{ type: "spring", stiffness: 200, damping: 24 }}
+						className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+					/>
+				</div>
+				<div className="p-4 space-y-2">
+					<motion.div
+						initial={{ opacity: 0, y: 8 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.4 }}
+						className="font-semibold text-base text-center text-white"
+					>
+						{p.title}
+					</motion.div>
+					<motion.p
+						initial={{ opacity: 0, y: 8 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ delay: 0.05, duration: 0.4 }}
+						className="text-sm text-neutral-300 text-center"
+					>
+						{p.description}
+					</motion.p>
+					<motion.div
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true }}
+						variants={{
+							hidden: { opacity: 0 },
+							visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
+						}}
+						className="flex flex-wrap gap-2 pt-2 justify-center"
+					>
+						{p.tech.map((tech) => (
+							<motion.span
+								key={tech}
+								variants={{ hidden: { y: 6, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
+								className="px-2.5 py-0.5 text-[11px] bg-neutral-800 rounded-full text-neutral-200 border border-white/10"
+							>
+								{tech}
+							</motion.span>
+						))}
+					</motion.div>
+					<div className="flex gap-3 text-xs pt-3 justify-center">
+						<a
+							href={p.demo}
+							onClick={(e) => e.stopPropagation()}
+							className="px-3 py-1 rounded-full bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700 transition-all duration-200 text-xs"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Live
+						</a>
+						<a
+							href={p.github}
+							onClick={(e) => e.stopPropagation()}
+							className="px-3 py-1 rounded-full bg-neutral-700 text-white font-semibold shadow hover:bg-neutral-800 transition-all duration-200 text-xs"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Code
+						</a>
+					</div>
+				</div>
+			</motion.div>
+		</motion.div>
+	);
+};
+
 export default function Projects() {
 	const router = useRouter();
 
@@ -128,74 +250,11 @@ export default function Projects() {
 			</h2>
 			<div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{projects.map((p) => (
-					<motion.div
+					<ProjectCard
 						key={p.slug}
-						initial={{ x: -100, opacity: 0 }}
-						whileHover={{
-							scale: 1.03,
-							boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
-						}}
-						whileTap={{ scale: 0.97 }}
-						whileInView={{ x: 0, opacity: 1 }}
-						viewport={{ once: true, amount: 0.5 }}
-						transition={{ duration: 0.6, type: "spring", stiffness: 140 }}
-						className={
-							"group rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 cursor-pointer shadow-md " +
-							"bg-gradient-to-br from-blue-50 via-pink-50 to-yellow-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-950 hover:shadow-lg w-full"
-						}
+						p={p}
 						onClick={() => handleProjectClick(p)}
-						style={{ minHeight: "260px" }}
-					>
-						<div className="relative h-28 bg-neutral-100 dark:bg-neutral-900">
-							<Image
-								src={p.image}
-								alt={p.title}
-								fill
-								className="object-cover dark:invert"
-								style={{
-									filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.10))",
-								}}
-							/>
-						</div>
-						<div className="p-3 space-y-1">
-							<div className="font-semibold text-base group-hover:underline text-center text-black">
-								{p.title}
-							</div>
-							<p className="text-xs text-black text-center">
-								{p.description}
-							</p>
-							<div className="flex flex-wrap gap-1 pt-1 justify-center">
-								{p.tech.map((tech) => (
-									<span
-										key={tech}
-										className="px-2 py-0.5 text-[10px] bg-neutral-100 dark:bg-neutral-800 rounded text-black"
-									>
-										{tech}
-									</span>
-								))}
-							</div>
-							<div className="flex gap-3 text-xs pt-1 justify-center">
-								<a
-									href={p.demo}
-									onClick={(e) => e.stopPropagation()}
-									className="px-3 py-1 rounded-full bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition-all duration-200 text-xs"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Live
-								</a>
-								<a
-									href={p.github}
-									onClick={(e) => e.stopPropagation()}
-									className="px-3 py-1 rounded-full bg-gray-800 text-white font-semibold shadow hover:bg-gray-900 transition-all duration-200 text-xs"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Code
-								</a>
-							</div>
-						</div>
-					</motion.div>
+					/>
 				))}
 			</div>
 		</section>

@@ -18,15 +18,18 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="w-full bg-gray-900 p-8 text-white z-10">
+      <section className="w-full bg-gray-900 p-0 text-white z-10">
         <Hero />
       </section>
 
       {/* About Section */}
-      <section className="w-full bg-gray-800  p-8 text-white z-10">
+      <section className="w-full bg-gray-900  p-8 text-white z-10">
         <About />
       </section>
-
+      {/* Experience Section */}
+      <section className="w-full bg-gray-900  p-8 text-white z-10">
+        <Experience />
+      </section>
  
 
       {/* Projects Section */}
@@ -38,6 +41,8 @@ export default function Home() {
       <section className="w-full bg-gray-900  p-8 text-white z-10">
         <Skills />
       </section>
+
+
 
       {/* GoodBusiness Section */}
       <section className="w-full z-10">
