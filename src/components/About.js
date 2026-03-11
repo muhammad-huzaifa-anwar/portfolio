@@ -33,7 +33,7 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-lg"
           >
-            Full Stack Engineer building service-based and product-driven web systems, from database architecture to user interfaces. I've worked on ERP, HRMS, POS, CRM, and CMS platforms, focusing on real business workflows and scalable system design.
+            Full Stack Engineer building service-based and product-driven web systems, from database architecture to user interfaces. I&apos;ve worked on ERP, HRMS, POS, CRM, and CMS platforms, focusing on real business workflows and scalable system design.
           </motion.p>
           
           <motion.p
@@ -53,7 +53,7 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="text-lg"
           >
-            I'm driven to work on products and client solutions where technology directly shapes business processes and long-term growth.
+            I&apos;m driven to work on products and client solutions where technology directly shapes business processes and long-term growth.
           </motion.p>
         </motion.div>
 
